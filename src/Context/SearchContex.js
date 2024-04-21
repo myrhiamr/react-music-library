@@ -4,3 +4,4 @@ export const SearchContext = createContext({
     term: '',
     handleSearch: () => {}
 })
+// test
