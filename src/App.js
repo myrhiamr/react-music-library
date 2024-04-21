@@ -1,8 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import SearchBar from "./Components/SearchBar";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import Gallery from "./Components/Gallery";
+import SearchBar from "./Components/SearchBar";
 import { DataContext } from './Context/DataContex'
 import { SearchContext } from './Context/SearchContex'
+import Spinner from './Components/Spinner'; 
+
+
+
+
 
 function App() {
     const [data, setData] = useState([])
@@ -42,6 +47,17 @@ function App() {
             setMessage("Please enter a search term");
         }
     };
+
+    const renderGallery = () => {
+        if (data) {
+            return (
+                <Suspense fallback={<Spinner />}> 
+                    <Gallery data={data} />
+                </Suspense>
+            )
+        }
+    }
+
 
     return (
         <div className="App">
